@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <!-- <Layout>
     <h1>Welcome to my blog :)</h1>
     <Pager :info="$page.allWordPressPost.pageInfo"/>
     <ul>
@@ -9,10 +9,13 @@
         <router-link :to="node.path">Read more</router-link>
       </li>
     </ul>
+  </Layout> -->
+  <Layout>
+    <div><p>this is a test</p></div>
   </Layout>
 </template>
 
-<page-query>
+<!--<page-query>
 query Home ($page: Int) {
   allWordPressPost (perPage: 10, page: $page) @paginate {
     pageInfo {
@@ -31,14 +34,14 @@ query Home ($page: Int) {
     }
   }
 }
-</page-query>
+</page-query> -->
 
 <script>
-import { Pager } from 'gridsome'
+import { Pager } from "gridsome";
 
 export default {
   components: {
     Pager
   }
-}
+};
 </script>

@@ -6,5 +6,13 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
+
+<style scoped lang="sass">
+@import '../base.sass'
+
+
+
+</style>
+

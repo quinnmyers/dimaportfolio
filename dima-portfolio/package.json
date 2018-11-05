@@ -9,5 +9,9 @@
   "dependencies": {
     "@gridsome/source-wordpress": "^0.0.3",
     "gridsome": "^0.2.0"
+  },
+  "devDependencies": {
+    "node-sass": "^4.10.0",
+    "sass-loader": "^7.1.0"
   }
 }

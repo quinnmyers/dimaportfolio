@@ -1,11 +1,11 @@
 <template>
   <Layout>
-    <h1 v-html="$page.wordPressPost.title"/>
-    <div v-html="$page.wordPressPost.fields.content"/>
+    <!-- <h1 v-html="$page.wordPressPost.title"/>
+    <div v-html="$page.wordPressPost.fields.content"/> -->
   </Layout>
 </template>
 
-<page-query>
+<!--<page-query>
 query Post ($path: String!) {
   wordPressPost (path: $path) {
     title
@@ -14,8 +14,8 @@ query Post ($path: String!) {
     }
   }
 }
-</page-query>
+</page-query>-->
 
 <script>
-export default {}
+export default {};
 </script>
