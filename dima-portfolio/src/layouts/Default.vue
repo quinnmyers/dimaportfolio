@@ -10,7 +10,8 @@
               <li class="layout__header__nav__desktopnav__navitem"
                   v-for='(n, index) in navItems'
                   :key='index'>
-                  <a :href="buildNavUrl(n.name)">{{ n.name }}</a>
+                  <a :href="buildNavUrl(n.name)" 
+                      v-smooth-scroll="{ duration: 1000}">{{ n.name }}</a>
               </li>
             </ul>
             <ul class="layout__header__nav__subnav">

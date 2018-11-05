@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "@gridsome/source-wordpress": "^0.0.3",
-    "gridsome": "^0.2.0"
+    "gridsome": "^0.2.0",
+    "vue2-smooth-scroll": "^1.0.3"
   },
   "devDependencies": {
     "node-sass": "^4.10.0",
