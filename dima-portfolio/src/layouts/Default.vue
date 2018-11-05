@@ -10,7 +10,7 @@
               <li class="layout__header__nav__desktopnav__navitem"
                   v-for='(n, index) in navItems'
                   :key='index'>
-                  {{ n.name }}
+                  <a :href="buildNavUrl(n.name)">{{ n.name }}</a>
               </li>
             </ul>
             <ul class="layout__header__nav__subnav">
@@ -45,22 +45,22 @@ export default {
       navItems: [
         {
           name: "Visual Development",
-          url: "#",
+          url: "#visualdevelopment",
           alt: ""
         },
         {
           name: "Illustration",
-          url: "#",
+          url: "#illustration",
           alt: ""
         },
         {
           name: "Sketches",
-          url: "#",
+          url: "#sketches",
           alt: ""
         },
         {
           name: "Social & Mobile",
-          url: "#",
+          url: "#social&mobile",
           alt: ""
         },
         {
@@ -92,6 +92,12 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    buildNavUrl(str) {
+      const urlPath = `#${str.replace(/\s/g, "").toLowerCase()}`;
+      return urlPath;
+    }
   }
 };
 </script>
@@ -127,12 +133,14 @@ export default {
         flex-direction: column
         margin-top: 20px
         &__navitem 
+          border-bottom: 1px solid $accent
+        &__navitem, a, &__:visited
           display: flex 
           align-self: flex-start
           font-family: $serif
+          text-decoration: none
           font-size: 1.1rem
           background: orange
-          border-bottom: 1px solid $accent
           &:nth-child(1)
             color: blue 
           &:nth-last-child(1)

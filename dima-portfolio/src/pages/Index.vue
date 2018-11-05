@@ -2,7 +2,8 @@
   <Layout>
     <section v-for='(section,index) in sections' 
             :key="index"
-            :class="createSectionClass(section.name)">
+            :class="createSectionClass(section.name)"
+            :id="createSectionClass(section.name)">
             <h2 class="section--header">{{ section.name }}</h2>
     </section>
   </Layout>
