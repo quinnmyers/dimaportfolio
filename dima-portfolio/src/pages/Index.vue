@@ -3,8 +3,20 @@
     <section v-for='(section,index) in sections' 
             :key="index"
             :class="createSectionClass(section.name)"
-            :id="createSectionClass(section.name)">
-            <h2 class="section--header">{{ section.name }}</h2>
+            :id="createSectionClass(section.name)"
+            ref="section">
+            <h2 class="section--header"
+                ref='sectionheader'>{{ section.name }}</h2>
+      <div class="image__container" 
+           ref='imagecontainer'>
+        <div v-for="(image, index) in section.images" :key="index">
+              {{ index }}
+              <p>{{ image.url }} </p>
+              <p>{{ image.alt }}</p>
+              <hr>
+            </div>
+      </div>
+            
     </section>
   </Layout>
   
@@ -20,21 +32,260 @@ export default {
   },
   data() {
     return {
+      sectionArray: [],
       sections: [
         {
-          name: "Visual Development"
+          name: "Visual Development",
+          images: [
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            }
+          ]
         },
         {
-          name: "Illustration"
+          name: "Illustration",
+          images: [
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            }
+          ]
         },
         {
-          name: "Sketches"
+          name: "Sketches",
+          images: [
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            }
+          ]
         },
         {
-          name: "Social & Mobile"
+          name: "Social & Mobile",
+          images: [
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            }
+          ]
         },
         {
-          name: "Marketing Posters"
+          name: "Marketing Posters",
+          images: [
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            },
+            {
+              url: "this is a test image",
+              alt: "testing alt text"
+            }
+          ]
         }
       ]
     };
@@ -43,7 +294,30 @@ export default {
     createSectionClass(str) {
       const className = str.replace(/\s/g, "").toLowerCase();
       return className;
+    },
+    populateRefsArray() {
+      this.sectionArray = [...this.$refs.section];
+      //let numberOfSections = this.sectionArray.length;
+      let sectionNumber = 0;
+      this.sectionArray.forEach(e => {
+        const sectionHeight = e.scrollHeight;
+        console.log("section height is: " + sectionHeight);
+        sectionNumber++;
+      });
+    },
+    measureSectionHeader() {
+      const sectionHeaderHeight = this.$refs.sectionheader[0].scrollHeight;
+      this.setImageSectionMargin(sectionHeaderHeight);
+    },
+    setImageSectionMargin(number) {
+      this.$refs.imagecontainer.forEach(el => {
+        el.style.marginTop = `${number}px`;
+      });
     }
+  },
+  mounted() {
+    this.populateRefsArray();
+    this.measureSectionHeader();
   }
 };
 </script>
@@ -54,9 +328,11 @@ export default {
 
 section 
   display: flex
+  flex-direction: column
   width: 100%
-  height: 1000px
-  background: yellow
+  height: auto
+  background: yellow 
+  margin-bottom: 50px
 .section--header
   display: flex
   align-self: flex-start
@@ -68,6 +344,7 @@ section
   line-height: 1.3rem
   background: orange
   border-bottom: 2px solid $accent
+.image__container
 
 </style>
 
