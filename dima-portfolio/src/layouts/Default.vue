@@ -1,5 +1,5 @@
 <template>
-<div>
+<div v-if='isMounted'>
   <app-head></app-head>
    <div class="content">
     <div class="layout">
@@ -26,7 +26,7 @@
           </nav>
         </header>
         <div class="pages">
-          <slot/>
+          <slot @testEvent='testFunction'/>
         </div>
       </div>
   </div>
@@ -38,11 +38,16 @@
 import Head from "./Base/Head.vue";
 
 export default {
+  props: ["layoutSectionArray"],
   components: {
     appHead: Head
   },
   data() {
     return {
+      isMounted: false,
+      windowHeight: 0,
+      percentArray: [],
+      positionArray: [0],
       navItems: [
         {
           name: "Visual Development",
@@ -98,7 +103,72 @@ export default {
     buildNavUrl(str) {
       const urlPath = `#${str.replace(/\s/g, "").toLowerCase()}`;
       return urlPath;
+    },
+    measureWindow() {
+      this.windowHeight = document.body.clientHeight;
+      console.log(this.windowHeight);
+    },
+    calculatePercents() {
+      console.log(this.layoutSectionArray);
+      let testArray = this.layoutSectionArray.map(percent => percent.height);
+      console.log(testArray);
+      this.percentArray = testArray.map(
+        percent =>
+          (100 * Math.round((10000 * percent) / this.windowHeight)) / 10000
+      );
+      //THIS IS WHERE I NEED TO FIX THE STARTING POINT %s
+      console.log(this.percentArray);
+      this.determineScrollLocation();
+    },
+    determineScrollLocation() {
+      var h = document.documentElement,
+        b = document.body,
+        st = "scrollTop",
+        sh = "scrollHeight";
+      this.sectionLocation(
+        ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100
+      );
+    },
+    sectionLocation(p) {
+      // console.log("HELLO");
+      // console.log(p);
+      if (p < this.percentArray[0]) {
+        console.log("you are in the FIRST section");
+      } else if (p > this.percentArray[0] && p < this.percentArray[1]) {
+        console.log("you are in the SECOND section");
+      } else if (p > this.percentArray[1] && p < this.percentArray[2]) {
+        console.log("you are in the THIRD section");
+      } else if (p > this.percentArray[2] && p < this.percentArray[3]) {
+        console.log("you are in the FOURTH section");
+      } else if (p > this.percentArray[4] && p < this.percentArray[5]) {
+        console.log("you are in the FIFTH section");
+      }
+    },
+    throttle(fn, wait) {
+      let time = Date.now();
+      return function() {
+        if (time + wait - Date.now() < 0) {
+          fn();
+          time = Date.now();
+        }
+      };
     }
+  },
+  watch: {
+    layoutSectionArray: function() {
+      this.calculatePercents();
+    }
+  },
+  mounted() {
+    this.isMounted = true;
+    this.$nextTick(console.log("layout: " + this.layoutSectionArray));
+    this.$nextTick(this.measureWindow);
+    this.$nextTick(
+      window.addEventListener(
+        "scroll",
+        this.throttle(this.determineScrollLocation, 25)
+      )
+    );
   }
 };
 </script>
