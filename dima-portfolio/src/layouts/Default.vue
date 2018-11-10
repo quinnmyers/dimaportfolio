@@ -9,16 +9,20 @@
             <ul class="layout__header__nav__desktopnav">
               <li class="layout__header__nav__desktopnav__navitem"
                   v-for='(n, index) in navItems'
-                  :key='index'>
+                  :key='index'
+                  ref="navitem">
                   <a :href="buildNavUrl(n.name)" 
-                      v-smooth-scroll="{ duration: 1000}">{{ n.name }}</a>
+                      v-smooth-scroll="{ duration: 1000}"><span class='navitem-text'>{{ n.name }}</span></a>
+                  <div :class="`expansion-div-${index} expansion-div`" :ref='`expansiondiv`'></div>
               </li>
             </ul>
             <ul class="layout__header__nav__subnav">
               <li class="layout__header__nav__subnav__subitem"
                   v-for="(s,index) in subNavItems"
-                  :key="index">
-                  {{ s.name }}
+                  :key="index"
+                  ref="navitem">
+                  <span class='navitem-text'>{{ s.name }}</span>
+                  <div :class="`expansion-div ${index}`"></div>
               </li>
             </ul>
             <!-- <g-link class="nav__link" :to="{ name: 'home' }">Home</g-link>
@@ -45,6 +49,7 @@ export default {
   data() {
     return {
       isMounted: false,
+      lastSectionTargeted: "",
       windowHeight: 0,
       percentArray: [],
       positionArray: [0],
@@ -146,30 +151,58 @@ export default {
       this.sectionLocation(percentScrolled);
     },
     sectionLocation(p) {
+      console.log(this.$refs.navitem);
       if (p >= this.startEndArray[0].start && p <= this.startEndArray[0].end) {
+        let targetExpansionDiv = this.$refs.expansiondiv[0];
+        targetExpansionDiv.style.width = "100%";
+        console.log(this.lastSectionTargeted);
+        let startOfSection = this.startEndArray[0].start;
+        let endOfSection = this.startEndArray[0].end;
         console.log("you are in the FIRST section");
       } else if (
         p >= this.startEndArray[1].start &&
         p <= this.startEndArray[1].end
       ) {
+        this.clearExpansionWidths();
+        let targetExpansionDiv = this.$refs.expansiondiv[1];
+        targetExpansionDiv.style.width = "100%";
         console.log("you are in the SECOND section");
       } else if (
         p >= this.startEndArray[2].start &&
         p <= this.startEndArray[2].end
       ) {
+        this.clearExpansionWidths();
+        let targetExpansionDiv = this.$refs.expansiondiv[2];
+        targetExpansionDiv.style.width = "100%";
         console.log("you are in the THIRD section");
       } else if (
         p >= this.startEndArray[3].start &&
         p <= this.startEndArray[3].end
       ) {
+        this.clearExpansionWidths();
+        let targetExpansionDiv = this.$refs.expansiondiv[3];
+        targetExpansionDiv.style.width = "100%";
         console.log("you are in the FOURTH section");
       } else if (
         p >= this.startEndArray[4].start &&
         p <= this.startEndArray[4].end
       ) {
+        this.clearExpansionWidths();
+        let targetExpansionDiv = this.$refs.expansiondiv[4];
+        targetExpansionDiv.style.width = "100%";
         console.log("you are in the FIFTH section");
       }
     },
+    clearExpansionWidths() {
+      for (var i = 0; i < this.layoutSectionArray.length; i++) {
+        let targetEl = this.$refs.expansiondiv[i];
+        // this.getCorrectExpansionDiv(i)
+        targetEl.style.width = 0;
+      }
+    },
+    // getCorrectExpansionDiv(i) {
+    //   return this.$refs.expansiondivi;
+    // },
     throttle(fn, wait) {
       let time = Date.now();
       return function() {
@@ -226,17 +259,23 @@ export default {
       //padding and margins for both lists of navitems
       &__desktopnav, &__subnav
         list-style: none 
+        .navitem-text 
+          margin-left: 20px
         &__navitem, &__subitem
-          padding-left: 20px
           margin: 12px 0px
+        .expansion-div
+          background: $accent
+          height: 2px
+          width: 0%
       &__desktopnav
         display: flex 
         flex-direction: column
         margin-top: 20px
-        &__navitem 
-          border-bottom: 1px solid $accent
-        &__navitem, a, &__:visited
+        .navitem-text 
+          margin-left: 20px
+        &__navitem, a, &__:visited, .navitem-text
           display: flex 
+          flex-direction: column
           align-self: flex-start
           font-family: $serif
           text-decoration: none
@@ -245,12 +284,17 @@ export default {
           &:nth-child(1)
             color: blue 
           &:nth-last-child(1)
-            color: purple
-      &__subnav 
+            color: purple 
+      &__subnav
+        display: flex 
+        flex-direction: column 
         font-family: $sans-serif
         font-size: 0.9rem 
         color: $grey
         &__subitem 
+          display: flex 
+          flex-direction: column 
+          align-self: flex-start
           background: yellow
           &:nth-child(1)
             color: blue 
