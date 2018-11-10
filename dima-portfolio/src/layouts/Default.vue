@@ -1,5 +1,5 @@
 <template>
-<div v-if='isMounted'>
+<div v-if='isMounted' ref='wrapper'>
   <app-head></app-head>
    <div class="content">
     <div class="layout">
@@ -48,6 +48,8 @@ export default {
       windowHeight: 0,
       percentArray: [],
       positionArray: [0],
+      startEndArray: [],
+      totalSectionHeight: 0,
       navItems: [
         {
           name: "Visual Development",
@@ -106,41 +108,65 @@ export default {
     },
     measureWindow() {
       this.windowHeight = document.body.clientHeight;
-      console.log(this.windowHeight);
     },
     calculatePercents() {
-      console.log(this.layoutSectionArray);
       let testArray = this.layoutSectionArray.map(percent => percent.height);
-      console.log(testArray);
       this.percentArray = testArray.map(
         percent =>
           (100 * Math.round((10000 * percent) / this.windowHeight)) / 10000
       );
-      //THIS IS WHERE I NEED TO FIX THE STARTING POINT %s
-      console.log(this.percentArray);
-      this.determineScrollLocation();
+      console.log(`calculate percents: ${this.percentArray}`);
+      console.log(`window height: ${this.windowHeight}`);
+      console.log(`sectionheights: ${this.totalSectionHeight}`);
+      this.sectionStartEnd(this.percentArray);
+    },
+    sectionStartEnd(array) {
+      console.log(array);
+      let index = 0;
+      let totalElementHeights = 0;
+      for (var i = 0; i < array.length; i++) {
+        let sectionEndPoint = totalElementHeights + array[i];
+        this.startEndArray.push({
+          id: i,
+          start: totalElementHeights,
+          end: sectionEndPoint
+        });
+        totalElementHeights = sectionEndPoint;
+        sectionEndPoint += totalElementHeights;
+      }
     },
     determineScrollLocation() {
-      var h = document.documentElement,
-        b = document.body,
-        st = "scrollTop",
-        sh = "scrollHeight";
-      this.sectionLocation(
-        ((h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight)) * 100
-      );
+      const totalHeight = this.totalSectionHeight;
+      let scrolledDistance =
+        -1 * this.$refs.wrapper.getBoundingClientRect().top;
+      let viewportHeight = window.innerHeight;
+      let scrollableDistance = totalHeight;
+      let percentScrolled = 100 * (scrolledDistance / scrollableDistance);
+      console.log(percentScrolled);
+      this.sectionLocation(percentScrolled);
     },
     sectionLocation(p) {
-      // console.log("HELLO");
-      // console.log(p);
-      if (p < this.percentArray[0]) {
+      if (p >= this.startEndArray[0].start && p <= this.startEndArray[0].end) {
         console.log("you are in the FIRST section");
-      } else if (p > this.percentArray[0] && p < this.percentArray[1]) {
+      } else if (
+        p >= this.startEndArray[1].start &&
+        p <= this.startEndArray[1].end
+      ) {
         console.log("you are in the SECOND section");
-      } else if (p > this.percentArray[1] && p < this.percentArray[2]) {
+      } else if (
+        p >= this.startEndArray[2].start &&
+        p <= this.startEndArray[2].end
+      ) {
         console.log("you are in the THIRD section");
-      } else if (p > this.percentArray[2] && p < this.percentArray[3]) {
+      } else if (
+        p >= this.startEndArray[3].start &&
+        p <= this.startEndArray[3].end
+      ) {
         console.log("you are in the FOURTH section");
-      } else if (p > this.percentArray[4] && p < this.percentArray[5]) {
+      } else if (
+        p >= this.startEndArray[4].start &&
+        p <= this.startEndArray[4].end
+      ) {
         console.log("you are in the FIFTH section");
       }
     },
@@ -156,6 +182,10 @@ export default {
   },
   watch: {
     layoutSectionArray: function() {
+      this.totalSectionHeight = this.layoutSectionArray
+        .map(element => element.height)
+        .reduce((a, b) => a + b, 0);
+      console.log(`total from reduce: ${this.totalSectionHeight}`);
       this.calculatePercents();
     }
   },

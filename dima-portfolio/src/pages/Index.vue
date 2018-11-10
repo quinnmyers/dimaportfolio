@@ -313,6 +313,7 @@ export default {
       this.$refs.section.forEach(e => {
         const style = e.currentStyle || window.getComputedStyle(e);
         const eHeight = e.scrollHeight;
+        console.log(eHeight);
         const eMarginBottom = style.marginBottom;
         const eMarginTop = style.marginTop;
         const eTotalHeight = this.getTotal(eHeight, eMarginBottom, eMarginTop);
@@ -323,41 +324,15 @@ export default {
         });
         counter++;
       });
-      console.log(this.sectionArray);
     },
     getTotal(h, b, t) {
       return h + parseInt(b, 10) + parseInt(t, 10);
-    },
-    windowPosition() {
-      this.$refs.section.forEach(e => {
-        console.log(e.dataset.key + ": " + e.getBoundingClientRect().top);
-      });
-    },
-    throttle(fn, wait) {
-      let time = Date.now();
-      return function() {
-        if (time + wait - Date.now() < 0) {
-          fn();
-          time = Date.now();
-        }
-      };
     }
   },
   mounted() {
     this.isMounted = true;
     this.$nextTick(this.measureSectionHeader);
     this.$nextTick(this.measureAllElements);
-    // this.$nextTick(
-    //   window.addEventListener("scroll", this.throttle(this.windowPosition, 100))
-    // );
-    // this.measureSectionHeader();
-    // this.measureAllElements();
-    // this.measureWindow();
-    // // this.alertWhenSectionHitsTop();
-    // window.addEventListener("scroll", this.throttle(this.windowPosition, 100));
-    // // this.alertWhenSectionHitsTop();
-    // // this.measureElementPositions();
-    // // this.measureAllElements();
   }
 };
 </script>
