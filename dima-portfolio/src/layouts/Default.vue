@@ -150,12 +150,23 @@ export default {
       console.log(percentScrolled);
       this.sectionLocation(percentScrolled);
     },
+    ///change where the div is at the end of the function? so that way it starts at 100% on the way back down
+    // flex-end at the end, etc
     sectionLocation(p) {
-      console.log(this.$refs.navitem);
       if (p >= this.startEndArray[0].start && p <= this.startEndArray[0].end) {
         let targetExpansionDiv = this.$refs.expansiondiv[0];
-        targetExpansionDiv.style.width = "100%";
-        console.log(this.lastSectionTargeted);
+        let currentSectionPercent = this.percentArray[0];
+        let differenceOfPercent = 100 / currentSectionPercent;
+        let adjustedScrollPosition = p * differenceOfPercent;
+        targetExpansionDiv.style.width = `${adjustedScrollPosition}%`;
+        // console.log(this.lastSectionTargeted);
+        // let currentSectionHeight = this.layoutSectionArray[0].height;
+        // console.log(`current sectionHeight: ${currentSectionHeight}`);
+        // let currentScrollPosition = document.body.getBoundingClientRect().top;
+        // console.log(`current sectionHeight: ${currentScrollPosition}`);
+        // let endOfCurrentSection =
+        //   currentScrollPosition + -1 * currentSectionHeight;
+        // console.log(`current sectionHeight: ${endOfCurrentSection}`);
         let startOfSection = this.startEndArray[0].start;
         let endOfSection = this.startEndArray[0].end;
         console.log("you are in the FIRST section");
@@ -196,13 +207,9 @@ export default {
     clearExpansionWidths() {
       for (var i = 0; i < this.layoutSectionArray.length; i++) {
         let targetEl = this.$refs.expansiondiv[i];
-        // this.getCorrectExpansionDiv(i)
         targetEl.style.width = 0;
       }
     },
-    // getCorrectExpansionDiv(i) {
-    //   return this.$refs.expansiondivi;
-    // },
     throttle(fn, wait) {
       let time = Date.now();
       return function() {
