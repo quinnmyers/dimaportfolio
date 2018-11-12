@@ -12,7 +12,7 @@
                   :key='index'
                   ref="navitem">
                   <a :href="buildNavUrl(n.name)" 
-                      v-smooth-scroll="{ duration: 1000}"><span class='navitem-text'>{{ n.name }}</span></a>
+                      v-smooth-scroll="{ duration: 1500}"><span class='navitem-text'>{{ n.name }}</span></a>
                   <div :class="`expansion-div-${index} expansion-div`" :ref='`expansiondiv`'></div>
               </li>
             </ul>
@@ -147,7 +147,6 @@ export default {
       let viewportHeight = window.innerHeight;
       let scrollableDistance = totalHeight;
       let percentScrolled = 100 * (scrolledDistance / scrollableDistance);
-      //console.log(percentScrolled);
       this.sectionLocation(percentScrolled);
     },
     ///change where the div is at the end of the function? so that way it starts at 100% on the way back down
@@ -156,20 +155,13 @@ export default {
       if (p >= this.startEndArray[0].start && p <= this.startEndArray[0].end) {
         let targetExpansionDiv = this.$refs.expansiondiv[0];
         let currentSectionPercent = this.percentArray[0];
-        //console.log(`current section percent:  ${currentSectionPercent}`);
         let differenceOfPercent = 100 / currentSectionPercent;
-        //console.log(`difference of percent:  ${differenceOfPercent}`);
         let adjustedScrollPosition = p * differenceOfPercent;
-        //console.log(`adjusted scroll position:  ${adjustedScrollPosition}`);
         targetExpansionDiv.style.width = `${adjustedScrollPosition}%`;
-        // let startOfSection = this.startEndArray[0].start;
-        // let endOfSection = this.startEndArray[0].end;
-        //console.log("you are in the FIRST section");
       } else if (
         p >= this.startEndArray[1].start &&
         p <= this.startEndArray[1].end
       ) {
-        //this.clearExpansionWidths();
         let targetExpansionDiv = this.$refs.expansiondiv[1];
         let currentSectionPercent = this.percentArray[1];
         let startingPoint = this.startEndArray[1].start;
@@ -181,7 +173,6 @@ export default {
         p >= this.startEndArray[2].start &&
         p <= this.startEndArray[2].end
       ) {
-        //this.clearExpansionWidths();
         let targetExpansionDiv = this.$refs.expansiondiv[2];
         let currentSectionPercent = this.percentArray[2];
         let startingPoint = this.startEndArray[2].start;
@@ -194,7 +185,6 @@ export default {
         p >= this.startEndArray[3].start &&
         p <= this.startEndArray[3].end
       ) {
-        //this.clearExpansionWidths();
         let targetExpansionDiv = this.$refs.expansiondiv[3];
         let currentSectionPercent = this.percentArray[3];
         let startingPoint = this.startEndArray[3].start;
@@ -207,7 +197,6 @@ export default {
         p >= this.startEndArray[4].start &&
         p <= this.startEndArray[4].end
       ) {
-        //this.clearExpansionWidths();
         let targetExpansionDiv = this.$refs.expansiondiv[4];
         let currentSectionPercent = this.percentArray[4];
         let startingPoint = this.startEndArray[4].start;
@@ -216,12 +205,6 @@ export default {
           p * differenceOfPercent - startingPoint * differenceOfPercent;
         targetExpansionDiv.style.width = `${adjustedScrollPosition}%`;
         console.log("you are in the FIFTH section");
-      }
-    },
-    clearExpansionWidths() {
-      for (var i = 0; i < this.layoutSectionArray.length; i++) {
-        let targetEl = this.$refs.expansiondiv[i];
-        targetEl.style.width = 0;
       }
     },
     throttle(fn, wait) {

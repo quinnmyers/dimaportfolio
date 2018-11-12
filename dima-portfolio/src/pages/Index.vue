@@ -20,6 +20,14 @@
       </div>
             
     </section>
+    <section class="about">
+      <h2 class="section--header">About</h2>
+      <p class="about--text content--section">Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat.</p>
+    </section>
+    <section class="cv">
+      <h2 class="section--header">Curriculum Vitae</h2>
+    </section>
+    <app-contact></app-contact>
   </Layout>
   
 </template>
@@ -27,10 +35,12 @@
 
 <script>
 import { Pager } from "gridsome";
+import Contact from "./components/Contact.vue";
 
 export default {
   components: {
-    Pager
+    Pager,
+    appContact: Contact
   },
   data() {
     return {
@@ -342,24 +352,14 @@ export default {
 
 
 section 
-  display: flex
-  flex-direction: column
-  width: 100%
-  height: auto
-  background: yellow 
-  margin-bottom: 50px
 .section--header
-  display: flex
-  align-self: flex-start
-  position: sticky
-  top: 10px
-  width: 100%
-  font-family: $sans-serif
-  font-size: 1.8rem
-  line-height: 1.3rem
-  background: orange
-  border-bottom: 2px solid $accent
 .image__container
+.content--section 
+  max-width: 60%
+.about--text 
+  margin-top: 25px
+  font-family: $serif 
+  font-size: 1.075rem
 
 </style>
 
