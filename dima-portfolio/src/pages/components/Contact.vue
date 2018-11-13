@@ -3,11 +3,12 @@
       <h2 class="section--header">Contact</h2>
       <div class="contact__container">
         <div class="contact__container__left">
-          <div class="contact__container__left__brand"></div>
+          <div class="contact__container__left__brand">{{ brandName }}</div>
+          <div class="contact__container__left__pronunciation">{{ pronunciation }}</div>
           <div class="contact__container__left__blurb"></div>
           <div class="contact__container__left__subcategory">
             <div class="contact__container__left__subcategory--subheader">
-               <p>Email</p>
+               <h3>Email</h3>
             </div>
             <div class="contact__container__left__subcategory--content">
                 <a :href="`mailto:${email}?subject=Email from Website`">
@@ -17,7 +18,7 @@
            </div>
           <div class="contact__container__left__subcategory">
             <div class="contact__container__left__subcategory--subheader">
-               <p>Blog</p>
+               <h3>Blog</h3>
             </div>
             <div class="contact__container__left__subcategory--content">
                 <a :href="`${blog}`" target="_blank">
@@ -27,18 +28,28 @@
            </div>
            <div class="contact__container__left__subcategory">
             <div class="contact__container__left__subcategory--subheader">
-               <p>Social</p>
+               <h3>Social</h3>
             </div>
             <div class="contact__container__left__subcategory--content">
                 <a v-for="(social, index) in socialLinks"
                    :key="index" 
                    :href="social.url">
-                  <img :src="social.image.src" :alt="social.image.alt">
+                  <img :src="social.image.src" :alt="social.image.alt" target="_blank">
                 </a>
             </div>
            </div>
         </div>
-        <div class="contact__container__right"></div>
+        <div class="contact__container__right">
+          <form :action="{ email }" method="POST">
+            <label for="name">Your Name</label>
+            <input class="input" type="text" name="name">
+            <label for="_replyto">Your Email</label>
+            <input class="input" type="email" name="_replyto">
+            <label for="message">Message</label>
+            <textarea name="message" id="" cols="30" rows="5"></textarea>
+            <input class="button" type="submit" value="Send">
+          </form>
+        </div>
       </div>
   </section>
 </template>
@@ -47,6 +58,8 @@
 export default {
   data() {
     return {
+      brandName: "Dima Duchet",
+      pronunciation: "(deema ; du-shay)",
       email: "dimaduchet@gmail.com",
       blog: "blogspot.com/dimaduchet",
       socialLinks: [
@@ -85,24 +98,70 @@ export default {
 
 .contact 
   &__container 
+    display: flex
+    width: 80%
     &__left 
-      &__brand 
+      &__brand, &__pronunciation
+        font-family: $sans-serif 
+      &__brand
+        margin-top: 18px
+        font-size: 1.55rem 
+        font-weight: bold
+      &__pronunciation 
+        font-size: 1.1rem
+        color: grey
       &__blurb 
       &__subcategory
         margin-top: 18px 
         &--subheader 
           font-family: $sans-serif
           font-size: 1.4rem
+          margin-top: 25px 
+          h3
+            font-size: 1.5rem
+            font-weight: 300
         &--content, a, a:visited
-          font-size: 1.1rem
-          margin-top: 4px
           text-decoration: none
           color: black
-          font-family: $serif
+          font-family: $sans-serif
           img 
             height: 30px
             margin-right: 7px
-        
-    width: 100%
+    &__right 
+      margin-top: 18px
+      width: 100%
+      background: red 
+      margin-left: 40px
+      form 
+        display: flex
+        width: 100%
+        flex-direction: column 
+        height: 100%
+        .input 
+          display: flex
+          width: 100%
+          border: 1px solid black 
+          font-family: $sans-serif 
+        .button 
+          width: 25% 
+          background: orange 
+          align-self: flex-end 
+          margin-top: 10px 
+          height: 28px 
+          font-family: $sans-serif 
+          &:hover 
+            color: $accent
+        label 
+          font-family: $sans-serif
+          font-size: 1.1rem
+          margin-top: 10px
+          &:nth-child(1)
+            margin-top: 5px
+        textarea 
+          resize: none 
+          font-family: $sans-serif
+          flex: 1
+
+
 
 </style>

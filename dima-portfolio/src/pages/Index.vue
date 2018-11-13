@@ -24,9 +24,7 @@
       <h2 class="section--header">About</h2>
       <p class="about--text content--section">Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat. Eu ullamco fugiat veniam anim id nostrud nostrud do eu aliquip. Tempor deserunt ex nisi dolore labore exercitation id id sit culpa cupidatat. Magna aliquip elit elit ea mollit amet voluptate. Adipisicing est in commodo consectetur. Tempor Lorem incididunt dolore commodo consequat.</p>
     </section>
-    <section class="cv">
-      <h2 class="section--header">Curriculum Vitae</h2>
-    </section>
+    <app-curriculum-vitae></app-curriculum-vitae>
     <app-contact></app-contact>
   </Layout>
   
@@ -36,11 +34,13 @@
 <script>
 import { Pager } from "gridsome";
 import Contact from "./components/Contact.vue";
+import CurriculumVitae from "./components/CurriculumVitae.vue";
 
 export default {
   components: {
     Pager,
-    appContact: Contact
+    appContact: Contact,
+    appCurriculumVitae: CurriculumVitae
   },
   data() {
     return {
@@ -355,11 +355,10 @@ section
 .section--header
 .image__container
 .content--section 
-  max-width: 60%
+  max-width: 80%
 .about--text 
   margin-top: 25px
-  font-family: $serif 
-  font-size: 1.075rem
+  font-family: $sans-serif
 
 </style>
 
