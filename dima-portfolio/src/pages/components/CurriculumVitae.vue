@@ -42,12 +42,12 @@ export default {
           {
             title: "Bachelor of Fine Arts",
             shortDescription: "VFX - Visual Development",
-            dates: "September 2009"
+            dates: "Sep 2009"
           },
           {
             title: "Academy of Art University of San Francisco",
             shortDescription: "(AAU) San Francisco, CA",
-            dates: "September 2005 - September 2009"
+            dates: "Sep 2005 - Sep 2009"
           }
         ]
       },
@@ -62,7 +62,7 @@ export default {
           {
             company: "Rocket Gaming Systems",
             title: "Artist & Animator",
-            dates: "February 2010 - April 2014"
+            dates: "Feb 2010 - April 2014"
           },
           {
             company: "Dana Production Co.",
@@ -84,6 +84,13 @@ export default {
   display: flex
   &__container 
     width: 80%
+    @include edgesnap 
+      width: 100%
+      // padding: 0px 15px
+      padding-right: 15px
+    @include navsnap 
+      padding-right: 0px 
+      padding: 0px 10px
     &__education, &__work
       &--subheader
         margin-bottom: 6px
@@ -91,11 +98,19 @@ export default {
         h3
           font-size: 1.5rem
           font-weight: 300
+          @include tablet-portrait 
+            font-size: 1.35rem
       &__entry
         display: flex 
         margin-bottom: 7px
         justify-content: space-between
         &__left 
+          @include tablet-portrait 
+            font-size: 0.9rem
+            max-width: 60%
+          @include phone-large
+            font-size: 0.8rem 
+            max-width: 65%
           .bold-underline 
             text-decoration: underline
             text-decoration-color: $accent
@@ -103,10 +118,16 @@ export default {
             font-family: $sans-serif 
             font-weight: bold 
             letter-spacing: .03rem
+            @include tablet-portrait 
+              font-size: 0.925rem
           p 
             font-family: $sans-serif
         &__right 
           .bold
             font-size: 1rem
             font-family: $sans-serif
+            @include tablet-portrait 
+              font-size: 0.8rem
+            @include phone-large 
+              font-size: 0.7rem
 </style>

@@ -100,7 +100,20 @@ export default {
   &__container 
     display: flex
     width: 80%
+    @include edgesnap 
+      width: 100%
+      // padding: 0px 15px
+      padding-right: 15px
+    @include navsnap 
+      padding-right: 0px 
+      padding: 0px 10px
+    @include phone-max 
+      flex-direction: column
     &__left 
+      @include tablet-portrait 
+        font-size: 0.9rem
+      @include phone-max 
+        width: 100%
       &__brand, &__pronunciation
         font-family: $sans-serif 
       &__brand
@@ -112,14 +125,18 @@ export default {
         color: grey
       &__blurb 
       &__subcategory
-        margin-top: 18px 
+        margin-top: 18px
         &--subheader 
           font-family: $sans-serif
           font-size: 1.4rem
-          margin-top: 25px 
+          margin-top: 25px
+          @include phone-large 
+            margin-top: 15px 
           h3
             font-size: 1.5rem
             font-weight: 300
+            @include tablet-portrait 
+              font-size: 1.35rem
         &--content, a, a:visited
           text-decoration: none
           color: black
@@ -130,8 +147,10 @@ export default {
     &__right 
       margin-top: 18px
       width: 100%
-      background: red 
+      //background: red 
       margin-left: 40px
+      @include phone-max 
+        margin-left: 0px
       form 
         display: flex
         width: 100%
@@ -142,24 +161,32 @@ export default {
           width: 100%
           border: 1px solid black 
           font-family: $sans-serif 
+          @include phone-large 
+            height: 30px
         .button 
           width: 25% 
-          background: orange 
+          //background: orange 
           align-self: flex-end 
           margin-top: 10px 
           height: 28px 
           font-family: $sans-serif 
+          border: 1px solid black
           &:hover 
             color: $accent
+          @include tablet-portrait 
+            font-size: 0.9rem
         label 
           font-family: $sans-serif
           font-size: 1.1rem
           margin-top: 10px
           &:nth-child(1)
             margin-top: 5px
+          @include tablet-portrait 
+            font-size: 1rem
         textarea 
           resize: none 
           font-family: $sans-serif
+          border: 1px solid black
           flex: 1
 
 

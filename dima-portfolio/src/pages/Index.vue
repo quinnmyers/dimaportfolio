@@ -354,8 +354,17 @@ export default {
 section 
 .section--header
 .image__container
+  @include navsnap 
+    padding: 0px 10px
 .content--section 
   max-width: 80%
+  @include edgesnap 
+    max-width: 100%
+    // padding: 0px 15px
+    padding-right: 15px
+  @include navsnap 
+    padding-right: 0px 
+    padding: 0px 10px
 .about--text 
   margin-top: 25px
   font-family: $sans-serif

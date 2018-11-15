@@ -3,7 +3,7 @@
   <app-head></app-head>
    <div class="content">
     <div class="layout">
-        <header class="layout__header">
+        <header class="layout__header" ref="header">
             <!-- <g-link :to="{ name: 'home' }">Gridsome</g-link> -->
           <nav class="layout__header__nav">
             <ul class="layout__header__nav__desktopnav">
@@ -29,6 +29,11 @@
             <g-link class="nav__link" :to="{ name: 'about' }">About</g-link> -->
           </nav>
         </header>
+          <button class='mobilenavbutton' @click="expandMobileNav">
+            <span class="line1"></span>
+            <span class="line2"></span>
+            <span class="line3"></span>
+          </button>
         <div class="pages">
           <slot @testEvent='testFunction'/>
         </div>
@@ -215,6 +220,19 @@ export default {
           time = Date.now();
         }
       };
+    },
+    expandMobileNav() {
+      const el = this.$refs.header;
+      el.classList.toggle("header-expanded");
+      if (el.classList.contains("header-expanded")) {
+        console.log("nav EXPANDED now");
+        document.body.style.height = "100vh";
+        document.body.style.overflow = "hidden";
+      } else {
+        console.log("nav COLLAPSED now");
+        document.body.style.height = "auto";
+        document.body.style.overflow = "auto";
+      }
     }
   },
   watch: {
@@ -240,22 +258,38 @@ export default {
 
 <style scoped lang="sass">
 @import '../base.sass'
-
+.header-expanded 
+  // display: flex !important
+  transform: translateX(0%) !important
+  top: 0 !important
+  margin-left: 0px !important
+  position: fixed !important
 .layout
   display: flex
+  height: 100%
   width: 100%
   &__header 
-    display: flex
+    display: block
     flex-direction: column
-    background: khaki
-    position: sticky 
+    //background: khaki
+    position: sticky
     top: 0
     width: 225px 
     height: 100vh
     border-left: 5px solid black
+    transition: all 0.5s ease
+    @include tablet-portrait 
+      width: 180px
+    @include navsnap 
+      transform: translateX(-100%)
+      z-index: 999
+      position: fixed
+      margin: auto
+      top: 0
     &__nav 
       //main container for nav
       display: flex 
+      width: 100% 
       flex-direction: column
       height: 100%
       //padding and margins for both lists of navitems
@@ -282,11 +316,13 @@ export default {
           font-family: $serif
           text-decoration: none
           font-size: 1.1rem
-          background: orange
+          //background: orange
           &:nth-child(1)
             color: blue 
           &:nth-last-child(1)
             color: purple 
+          @include tablet-portrait 
+            font-size: 11pt
       &__subnav
         display: flex 
         flex-direction: column 
@@ -297,15 +333,46 @@ export default {
           display: flex 
           flex-direction: column 
           align-self: flex-start
-          background: yellow
+          //background: yellow
           &:nth-child(1)
             color: blue 
           &:nth-last-child(1)
             color: purple
+          @include tablet-portrait
+            font-size: 0.85rem
+  .mobile__nav__expander
+    display: flex 
+    flex-direction: column
+    height: 100%
+    width: 10px 
+    background: $accent
   .pages
     display: flex 
     flex-direction: column 
     flex: 1
-    //background: red 
+    @include navsnap 
+      width: 100%
+  .mobilenavbutton
+    display: flex 
+    flex-direction: column 
+    justify-content: center
+    align-items: center
+    background: white
+    height: 45px 
+    width: 90px 
+    position: fixed
+    top: 0 
+    right: 0
+    z-index: 999
+    .line1, .line2, .line3
+      display: flex
+      background: black
+      height: 2px 
+      width: 40px
+    .line1 
+      margin-top: 3px
+    .line2 
+      margin: 6px 0px
+  
     
 </style>

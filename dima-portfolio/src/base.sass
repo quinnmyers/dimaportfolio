@@ -21,15 +21,6 @@ button, input[type="submit"], input[type="reset"]
     cursor: pointer
     outline: inherit
 
-body 
-  display: flex 
-  justify-content: center
-  .content
-    display: flex 
-    flex-direction: column
-    width: 1200px
-    background: lightskyblue
-
 //VARIABLES
 
 //general 
@@ -43,39 +34,19 @@ $grey: #898989
 $serif: 'Cormorant', serif 
 $sans-serif: 'Hind Madurai', sans-serif
 
-//global styles 
-section
-  display: flex
-  flex-direction: column
-  width: 100%
-  height: auto
-  background: yellow 
-  margin-bottom: 50px
-  .section--header
-    display: flex
-    position: sticky
-    top: 0px
-    padding-top: 15px
-    //height: 40px
-    width: 100%
-    font-family: $sans-serif
-    font-size: 1.8rem
-    //line-height: 1.3rem
-    background: white
-    border-bottom: 2px solid $accent
 
 // MIXINS
 
 
 $phone-small: 330px
 $phone-normal: 375px
-$phone-max-width: 440px
+$phone-max-width: 490px
 $phone-large: 414px
 $tablet-phone: 650px
 $tablet-width: 768px
 $desktop-width: 992px
-$edgesnap-width: 1100px
-$nav-snap: 700px
+$edgesnap-width: 1200px
+$nav-snap: 680px
 $testimonial-snap: 900px 
 
 
@@ -94,6 +65,10 @@ $testimonial-snap: 900px
 
 =tablet-phone
   @media (max-width: #{$tablet-phone})
+    @content
+
+=phone-max
+  @media (max-width: #{$phone-max-width})
     @content
 
 =phone
@@ -116,7 +91,46 @@ $testimonial-snap: 900px
   @media (max-width: #{$phone-small})
     @content
 
-  
+//global styles 
+section
+  display: flex
+  flex-direction: column
+  width: 100%
+  height: auto
+  //background: yellow 
+  margin-bottom: 50px
+  .section--header
+    display: flex
+    position: sticky
+    top: 0px
+    padding-top: 15px
+    //height: 40px
+    width: 100%
+    font-family: $sans-serif
+    font-size: 1.8rem
+    //line-height: 1.3rem
+    background: white
+    border-bottom: 2px solid $accent
+    @include edgesnap 
+      // padding-left: 15px
+    @include tablet-portrait 
+      padding-top: 12px
+      font-size: 1.6rem
+    @include navsnap 
+      padding-left: 10px
+
+
+body 
+  display: flex 
+  justify-content: center
+  .content
+    display: flex 
+    flex-direction: column
+    width: 1200px
+    //background: lightskyblue 
+    @include edgesnap 
+      width: 100%
+
 //normalize.sass  
 //i added *
 html, *
