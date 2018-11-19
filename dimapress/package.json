@@ -1,5 +1,5 @@
 {
-  "name": "dima-portfolio",
+  "name": "dimapress",
   "private": true,
   "scripts": {
     "build": "gridsome build",
@@ -7,11 +7,8 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
-    "@gridsome/source-wordpress": "^0.0.3",
-    "gridsome": "^0.2.0",
-    "vue2-smooth-scroll": "^1.0.3"
-  },
-  "devDependencies": {
+    "@gridsome/source-wordpress": "^0.1.0",
+    "gridsome": "^0.3.0",
     "node-sass": "^4.10.0",
     "sass-loader": "^7.1.0"
   }

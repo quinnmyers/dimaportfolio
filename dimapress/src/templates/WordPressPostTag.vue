@@ -4,14 +4,14 @@
   </Layout>
 </template>
 
-<!--<page-query>
+<page-query>
 query PostTag ($path: String!) {
   wordPressPostTag (path: $path) {
     title
   }
 }
-</page-query>-->
+</page-query>
 
 <script>
-export default {};
+export default {}
 </script>
